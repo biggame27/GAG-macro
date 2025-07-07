@@ -6,6 +6,22 @@ import time
 from pynput import mouse, keyboard
 import datetime
 
+def safe_click(x, y, button='left'):
+    """
+    A more robust click function that "wakes up" the cursor first.
+    """
+    print(f"Moving to ({x}, {y})...")
+    pydirectinput.moveTo(x, y)
+    time.sleep(0.1) # A small pause after moving
+    
+    print("Performing a relative move to 'wake up' the cursor...")
+    # Move 1 pixel right and then back. This is a quick "jitter".
+    pydirectinput.moveRel(1, 0) 
+    time.sleep(0.05)
+    pydirectinput.moveRel(-1, 0)
+
+    print(f"Clicking at the current position.")
+    pydirectinput.click(button=button)
 
 # # looking for keywords: bee, sun, rare, legendary, mythical, paradise, bug
 def retrieve_messages(channelID):
@@ -22,12 +38,26 @@ def retrieve_messages(channelID):
 # print(retrieve_messages('1377312737180389408'))
 pydirectinput.PAUSE = 0.05
 
+def buy_egg():
+    pydirectinput.press('\\')
+    for i in range(12):
+        pydirectinput.press('a')
+    pydirectinput.press('w')
+    for i in range(4):
+        pydirectinput.press('d')
+    pydirectinput.press('s')
+    pydirectinput.press('enter')
+    
+
 def on_click(x, y, button, pressed):
     """
     This function is called for each mouse event.
     It triggers the action on a middle mouse button press.
     """
     if button == mouse.Button.middle and pressed:
+        buy_egg()
+        safe_click(920, 670)
+        safe_click()
         pydirectinput.keyDown('d')
         time.sleep(0.8)
         pydirectinput.keyUp('d')
