@@ -150,10 +150,19 @@ def retrieve_messages(channelID):
   # https://discord.com/api/v9/channels/1374191514518814734/messages?limit=50
   r = requests.get(f'https://discord.com/api/v9/channels/{channelID}/messages?limit=50', headers=headers)
   jsonn = json.loads(r.text)
-  text = jsonn[2]['content']
-  allowed_ids = {'1374191514103578681', '1385993315932966943'}
-  ids = re.findall(r'@&(\d+)', text)
-  return any(id not in allowed_ids for id in ids)
+  # for value in jsonn:
+  #   print(value['embeds'][0]['fields'][0]['value'], '\n')
+  # text = jsonn[0]['embeds'][0]['fields'][0]['value']
+  # lower_text = text.lower()
+  # return any(keyword in lower_text for keyword in keywords)
+  text = ""
+  for value in jsonn:
+     if ('Vulcan' in value['author']['username']):
+      text = value['embeds'][0]['fields'][0]['value']
+      break
+  lower_text = text.lower()
+  return any(keyword in lower_text for keyword in keywords)
+
 
 def purchase():
     pydirectinput.press('e')
@@ -205,7 +214,7 @@ def on_click(x, y, button, pressed):
                 gear()
                 cnt += 1
             # and retrieve_messages('1377312737180389408')
-            if (now == 31 or now == 1) and retrieve_messages('1374191514518814734'):
+            if (now == 30 or now == 0) and retrieve_messages('1373218102313091072'):
                 buy_egg()
             time.sleep(30)
 

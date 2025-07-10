@@ -45,14 +45,19 @@ def retrieve_messages(channelID):
   jsonn = json.loads(r.text)
   # for value in jsonn:
   #   print(value['embeds'][0]['fields'][0]['value'], '\n')
-  text = jsonn[2]['content']
-  allowed_id = '1374191514103578681'
-  allowed_id2 = '1385993315932966943'
-  ids = re.findall(r'@&(\d+)', text)
-  return any(id != allowed_id for id in ids)
+  # text = jsonn[0]['embeds'][0]['fields'][0]['value']
+  # lower_text = text.lower()
+  # return any(keyword in lower_text for keyword in keywords)
+  text = ""
+  for value in jsonn:
+     if ('Vulcan' in value['author']['username']):
+      text = value['embeds'][0]['fields'][0]['value']
+      break
+  lower_text = text.lower()
+  return any(keyword in lower_text for keyword in keywords)
 
 # print(retrieve_messages('1377312737180389408'))
-print(retrieve_messages('1374191514518814734'))
+print(retrieve_messages('1373218102313091072'))
 # pydirectinput.PAUSE = 0.05
 
 # def buy_egg():
