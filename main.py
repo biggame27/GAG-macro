@@ -144,25 +144,24 @@ def gear():
 #     lower_text = text.lower()
 #     return any(keyword in lower_text for keyword in keywords)
 
-#real
-# def retrieve_messages(channelID):
-#   keywords = ['bee', 'sun', 'rare', 'legendary', 'mythical', 'paradise', 'bug']
-#   headers = {'authorization': 'NDUxOTI1NTQyMDAzMDE1Njgx.G4WHaH.ZvQ-cy3UxmMbSAe-G747oAH26kbjz9HfxDfQtc'}
-#   # https://discord.com/api/v9/channels/1374191514518814734/messages?limit=50
-#   r = requests.get(f'https://discord.com/api/v9/channels/{channelID}/messages?limit=50', headers=headers)
-#   jsonn = json.loads(r.text)
-#   # for value in jsonn:
-#   #   print(value['embeds'][0]['fields'][0]['value'], '\n')
-#   # text = jsonn[0]['embeds'][0]['fields'][0]['value']
-#   # lower_text = text.lower()
-#   # return any(keyword in lower_text for keyword in keywords)
-#   text = ""
-#   for value in jsonn:
-#      if ('Vulcan' in value['author']['username']):
-#       text = value['embeds'][0]['fields'][0]['value']
-#       break
-#   lower_text = text.lower()
-#   return any(keyword in lower_text for keyword in keywords)
+def retrieve_messages(channelID):
+  keywords = ['bee', 'sun', 'rare', 'legendary', 'mythical', 'paradise', 'bug']
+  headers = {'authorization': 'NDUxOTI1NTQyMDAzMDE1Njgx.G4WHaH.ZvQ-cy3UxmMbSAe-G747oAH26kbjz9HfxDfQtc'}
+  # https://discord.com/api/v9/channels/1374191514518814734/messages?limit=50
+  r = requests.get(f'https://discord.com/api/v9/channels/{channelID}/messages?limit=50', headers=headers)
+  jsonn = json.loads(r.text)
+  # for value in jsonn:
+  #   print(value['embeds'][0]['fields'][0]['value'], '\n')
+  # text = jsonn[0]['embeds'][0]['fields'][0]['value']
+  # lower_text = text.lower()
+  # return any(keyword in lower_text for keyword in keywords)
+  text = ""
+  for value in jsonn:
+     if ('Vulcan' in value['author']['username']):
+      text = value['embeds'][0]['fields'][0]['value']
+      break
+  lower_text = text.lower()
+  return any(keyword in lower_text for keyword in keywords)
 
 
 def purchase():
@@ -215,8 +214,8 @@ def on_click(x, y, button, pressed):
                 gear()
                 cnt += 1
             # and retrieve_messages('1377312737180389408')
-            # if (now == 30 or now == 0) and retrieve_messages('1373218102313091072'):
-            #     buy_egg()
+            if (now == 30 or now == 0) and retrieve_messages('1373218102313091072'):
+                buy_egg()
             time.sleep(30)
 
 def on_press(key):
