@@ -37,27 +37,27 @@ def safe_click(x, y, button='left'):
 #   lower_text = text.lower()
 #   return any(keyword in lower_text for keyword in keywords)
 
-def retrieve_messages(channelID):
-  keywords = ['bee', 'sun', 'rare', 'legendary', 'mythical', 'paradise', 'bug']
-  headers = {'authorization': 'NDUxOTI1NTQyMDAzMDE1Njgx.G4WHaH.ZvQ-cy3UxmMbSAe-G747oAH26kbjz9HfxDfQtc'}
-  # https://discord.com/api/v9/channels/1374191514518814734/messages?limit=50
-  r = requests.get(f'https://discord.com/api/v9/channels/{channelID}/messages?limit=50', headers=headers)
-  jsonn = json.loads(r.text)
-  # for value in jsonn:
-  #   print(value['embeds'][0]['fields'][0]['value'], '\n')
-  # text = jsonn[0]['embeds'][0]['fields'][0]['value']
-  # lower_text = text.lower()
-  # return any(keyword in lower_text for keyword in keywords)
-  text = ""
-  for value in jsonn:
-     if ('Vulcan' in value['author']['username']):
-      text = value['embeds'][0]['fields'][0]['value']
-      break
-  lower_text = text.lower()
-  return any(keyword in lower_text for keyword in keywords)
+# def retrieve_messages(channelID):
+#   keywords = ['bee', 'sun', 'rare', 'legendary', 'mythical', 'paradise', 'bug']
+#   headers = {'authorization': 'NDUxOTI1NTQyMDAzMDE1Njgx.G4WHaH.ZvQ-cy3UxmMbSAe-G747oAH26kbjz9HfxDfQtc'}
+#   # https://discord.com/api/v9/channels/1374191514518814734/messages?limit=50
+#   r = requests.get(f'https://discord.com/api/v9/channels/{channelID}/messages?limit=50', headers=headers)
+#   jsonn = json.loads(r.text)
+#   # for value in jsonn:
+#   #   print(value['embeds'][0]['fields'][0]['value'], '\n')
+#   # text = jsonn[0]['embeds'][0]['fields'][0]['value']
+#   # lower_text = text.lower()
+#   # return any(keyword in lower_text for keyword in keywords)
+#   text = ""
+#   for value in jsonn:
+#      if ('Vulcan' in value['author']['username']):
+#       text = value['embeds'][0]['fields'][0]['value']
+#       break
+#   lower_text = text.lower()
+#   return any(keyword in lower_text for keyword in keywords)
 
 # print(retrieve_messages('1377312737180389408'))
-print(retrieve_messages('1373218102313091072'))
+# print(retrieve_messages('1373218102313091072'))
 # pydirectinput.PAUSE = 0.05
 
 # def buy_egg():
