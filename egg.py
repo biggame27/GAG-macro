@@ -1,6 +1,7 @@
 import pydirectinput
 import time
 from pynput import mouse, keyboard
+pydirectinput.PAUSE = 0.05
 
 def safe_click(x, y, button='left'):
     """
@@ -35,7 +36,6 @@ def egg():
     """
     The egg sequence using pydirectinput.
     """
-    # make sure to look at top of table, be 9 scroll wheels away from first person
     pydirectinput.keyDown('d')
     time.sleep(0.5)
     pydirectinput.keyUp('d')
@@ -44,13 +44,12 @@ def egg():
     
     time.sleep(3)
     safe_click(1200, 500)
-    time.sleep(3)
 
     menu_sequence = ['\\', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'd']
     stuff_to_buy = [2,3,4,5, 7,8]
+    time.sleep(0.5)
     for i in menu_sequence:
         pydirectinput.press(i)
-        time.sleep(0.1)
 
     for i in range(6):
       if i >= 4:
@@ -58,6 +57,7 @@ def egg():
       if i != 5:
         pydirectinput.press('s')
         pydirectinput.press('s')
+    time.sleep(0.1)
     for i in range(6):
         pydirectinput.press('w')
         pydirectinput.press('w')
@@ -65,7 +65,6 @@ def egg():
     pydirectinput.press('d')
     pydirectinput.press('enter')
     pydirectinput.press('\\')
-
 time.sleep(5)
 # pydirectinput.keyDown('d')
 # time.sleep(0.5)
